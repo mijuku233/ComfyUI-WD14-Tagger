@@ -22,8 +22,8 @@ defaults = {
     "model": "wd-v1-4-moat-tagger-v2",
     "threshold": 0.35,
     "character_threshold": 0.85,
-    "replace_underscore": False,
-    "trailing_comma": False,
+    "replace_underscore": True,
+    "trailing_comma": True,
     "exclude_tags": ""
 }
 defaults.update(config.get("settings", {}))
@@ -38,7 +38,7 @@ def get_installed_models():
     return filter(lambda x: x.endswith(".onnx"), os.listdir(models_dir))
 
 
-async def tag(image, model_name, threshold=0.35, character_threshold=0.85, exclude_tags="", replace_underscore=True, trailing_comma=False, client_id=None, node=None):
+async def tag(image, model_name, threshold=0.35, character_threshold=0.85, exclude_tags="", replace_underscore=True, trailing_comma=True, client_id=None, node=None):
     if model_name.endswith(".onnx"):
         model_name = model_name[0:-5]
     installed = list(get_installed_models())
